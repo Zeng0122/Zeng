@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="MyModule">
+<head>
+	<meta charset="UTF-8">
+	<title>指令系统与mvc</title>
+	 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<script src="bower_components/angular/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="MyCtrl">
+		<loader howToLoad="loadData()">滑动加载</loader><!--howToLoad:定义自定义属性 -->
+	</div>
+	<div ng-controller="MyCtrl2">
+		<loader howToLoad="loadData2()">滑动加载</loader><!--howToLoad:定义自定义属性 -->
+	</div>
+	<script type="text/javascript">
+	var MyModule=angular.module("MyModule",[]);
+	MyModule.controller('MyCtrl',['$scope',function($scope){
+		$scope.loadData=function(){
+			console.log("加载数据....");
+		}
+	}]);
+	MyModule.controller('MyCtrl2',['$scope',function($scope){
+		$scope.loadData2=function(){
+			console.log("加载数据....22222");
+		}
+	}]);
+	MyModule.directive('loader',function(){
+		return{
+			restrict:"AE",
+			link:function(scope,element,attrs){
+				element.bind('mouseenter',function(){
+					// scope.loadData();
+					// scope.$apply("loadData()");
+					scope.$apply(attrs.howtoload);
+				});
+			}
+		}
+	});
+	</script>
+</body>
+</html>
