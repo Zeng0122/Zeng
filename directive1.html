@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="MyModule">
+<head>
+	<meta charset="UTF-8">
+	<title>directive</title>
+	<script src="bower_components/angular/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="MyCtrl">
+		ctrl:
+		<!--  <input type="text" ng-model="ctrFlaver"/>  -->
+		 <drink flaver="{{ctrFlaver}}"></drink> 
+		<!-- <greeting greet="sayHello(name)"></greeting>
+		<greeting greet="sayHello(name)"></greeting>
+		<greeting greet="sayHello(name)"></greeting> -->
+	</div>
+	<script>
+		var MyModule=angular.module("MyModule",[]);
+		MyModule.controller('MyCtrl',['$scope',function($scope){
+			$scope.ctrFlaver="百威";
+		}]);
+		MyModule.directive("drink",function(){
+			return{
+				restrict:"AE",
+				/*使用@*/
+				scope:{
+					flaver:'@'
+				},
+				template:"<div>{{flaver}}</div>"
+				/*使用“=”*/
+				// scope:{
+				//  	flaver:'='
+				// },
+				// template:'<input type="text" ng-model="flaver"/>'
+				// link:function(scope,element,attrs){
+				// 	scope.flaver=attrs.flaver;
+				// }
+				/*使用&*/
+	 //  MyModule.controller('MyCtrl',['$scope',function($scope){
+		//  	$scope.sayHello=function(name){
+		//  		alert("Hello"+name);
+		//  	};
+		//  }]);
+	 // MyModule.directive("greeting",function(){
+	 // 	return{
+	 // 		restrict:"AE",
+	 // 		scpoe:{
+	 // 			greet:'&'
+	 // 		},
+	 // 		template:'<input type="text" ng-model="userName"/><br/>'+
+	 // 				 '<button  ng-click="greet({name:$scope.userName})">Greeting</button><br/>'
+	   	}
+	  });
+	</script>
+</body>
+</html>
